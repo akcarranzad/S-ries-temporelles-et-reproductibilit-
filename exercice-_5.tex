@@ -1,0 +1,590 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Séries temporelles et reproductibilité},
+  pdfauthor={Andrea Katherín Carranza Díaz},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Séries temporelles et reproductibilité}
+\author{Andrea Katherín Carranza Díaz}
+\date{2020-07-29}
+
+\begin{document}
+\maketitle
+
+\hypertarget{consigne}{%
+\subsection{Consigne}\label{consigne}}
+
+Les données du fichier hawai.csv comprennent les moyennes des mesures
+mensuelles de CO2 atmosphérique entre en ppm-volume collectées au Mauna
+Loa Observatory à Hawaii de mars 1958 à décembre 2001, inclusivement.
+
+\hypertarget{lecture-des-donnuxe9es}{%
+\subsection{Lecture des données}\label{lecture-des-donnuxe9es}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.0     v purrr   0.3.4
+## v tibble  3.0.1     v dplyr   0.8.5
+## v tidyr   1.0.3     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"lubridate"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     intersect, setdiff, union
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"forecast"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'forecast' was built under R version 4.0.2
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'quantmod':
+##   method            from
+##   as.zoo.data.frame zoo
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"fpp2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'fpp2' was built under R version 4.0.2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: fma
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'fma' was built under R version 4.0.2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: expsmooth
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'expsmooth' was built under R version 4.0.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawai <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"hawai.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   time = col_double(),
+##   CO2 = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(hawai)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 526
+## Columns: 2
+## $ time <dbl> 1958.167, 1958.250, 1958.333, 1958.417, 1958.500, 1958.583, 19...
+## $ CO2  <dbl> 316.1000, 317.2000, 317.4333, 317.4333, 315.6250, 314.9500, 31...
+\end{verbatim}
+
+Le tableau de données est lu, qui comporte 526 observations et 2
+variables, toutes deux à double caractère, il est donc nécessaire de
+convertir la variable \textbf{time} pour qu'elle soit reconnue comme une
+date. Ceci est fait au moyen de la fonction
+\texttt{lubridate::date\_decimal()} et UTC est défini comme le fuseau
+horaire requis. Il est possible de vérifier cette transformation avec la
+fonction de base class().
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CO2_hawai <-}\StringTok{ }\NormalTok{hawai }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{time =} \KeywordTok{date_decimal}\NormalTok{(hawai}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{tz =} \StringTok{"UTC"}\NormalTok{))}
+\KeywordTok{glimpse}\NormalTok{(CO2_hawai)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 526
+## Columns: 2
+## $ time <dttm> 1958-03-02 20:00:01, 1958-04-02 06:00:00, 1958-05-02 16:00:00...
+## $ CO2  <dbl> 316.1000, 317.2000, 317.4333, 317.4333, 315.6250, 314.9500, 31...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CO2_hawai }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pull}\NormalTok{(time) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{class}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "POSIXct" "POSIXt"
+\end{verbatim}
+
+Une fois la transformation effectuée, nous procédons à la graduation
+pour observer comment le CO2 se comporte dans le temps. On observe que
+les données présentent une tendance croissante et présentent également
+une fluctuation saisonnière.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CO2_hawai }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ time, }\DataTypeTok{y =}\NormalTok{ CO2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\hypertarget{cruxe9ation-de-la-suxe9rie-temporelle}{%
+\subsection{Création de la série
+temporelle}\label{cruxe9ation-de-la-suxe9rie-temporelle}}
+
+La fonction \texttt{stats::ts()} sera utilisée pour créer la série
+temporelle. L'argument \texttt{start}, définit la date de la première
+observation (mars 1958) et l'argument \texttt{frequency} définit le
+nombre d'observations par unité de temps. Dans ce cas, les mesures ont
+été prises chaque mois, \texttt{frequency} = 12.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawai_ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(CO2_hawai }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{time),}
+             \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DecValTok{1958}\NormalTok{, }\DecValTok{3}\NormalTok{), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{suxe9paration-de-la-suxe9rie-en-parties-dentrauxeenement}{%
+\subsection{Séparation de la série en parties
+d'entraînement}\label{suxe9paration-de-la-suxe9rie-en-parties-dentrauxeenement}}
+
+La fonction \texttt{windows()} sera utilisée pour séparer les séries en
+parties d'entraînement et de test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawai_train <-}\StringTok{ }\KeywordTok{window}\NormalTok{(hawai_ts, }\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DecValTok{1958}\NormalTok{, }\DecValTok{3}\NormalTok{), }\DataTypeTok{end =} \KeywordTok{c}\NormalTok{(}\DecValTok{1988}\NormalTok{, }\DecValTok{12}\NormalTok{))}
+\NormalTok{hawai_test <-}\StringTok{ }\KeywordTok{window}\NormalTok{(hawai_ts, }\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DecValTok{1989}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{end =} \KeywordTok{c}\NormalTok{(}\DecValTok{2001}\NormalTok{, }\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Environ 70 \% des mesures sont attribuées à la série d'entraînement (les
+quelque 370 premières observations, qui ont été faites de mars 1958 à
+décembre 1988) et les 30 \% restants des observations sont attribuées à
+la série d'essai (de janvier 1989 à décembre 2001) :
+
+\hypertarget{cruxe9ation-dun-moduxe8le-pruxe9visionnel-sur-les-donnuxe9es-dentrauxeenement}{%
+\subsection{Création d'un modèle prévisionnel sur les données
+d'entraînement}\label{cruxe9ation-dun-moduxe8le-pruxe9visionnel-sur-les-donnuxe9es-dentrauxeenement}}
+
+Le modèle choisi pour les données sur la formation était le modèle
+\texttt{ETS} (\emph{erreur:} sans tendance - tendance additive -
+tendance adouci, \emph{tendance :} sans saison - saison additive -
+saison multiplicative et \emph{saisonnalité :} erreur additive - erreur
+multiplicative), qui fait partie de la famille \texttt{SES}.
+L'optimisation du modèle est appliquée aux séries de formation en
+utilisant la fonction de \texttt{forecast::ets()} qui permet de
+connaître le type d'erreur du modèle, la tendance et la station, ainsi
+que de trouver les paramètres de lissage α, β, γ du modèle. Le modèle
+obtenue correspond à un modèle ETS(A,A,A). Cela signifie qu'une erreur,
+une tendance et une saison de type additive sont obtenues.
+
+la prévision est réalisée par modélisation additive en fonction du
+niveau, de la tendance et de la saison. Le paramètre α décrit la
+distribution des poids. Dans ce cas, on a obtenu un α=0.6698, ce qui
+signifie que les événements plus récents du modèle ont un poids plus
+important dans la prévision.Pendant que, le valeur de β = 0.003
+(s'approche de zéro) indique que la tendance change à une faible
+vitesse. γ correspond à la portion saisonnière. Généralement, ce
+paramètre fluctue autour de zéro, dans ce cas, γ = 2e-04.Le modèle ne
+présente pas de valeur ϕ, qui adouci la pente. Il est donc probable que
+l'adoucissement ne se justifie pas.
+
+Le graphique du niveau en fonction du temps indique que la tendance de
+la concentration de CO2 dans l'atmosphère augmente avec le temps. En
+outre, dans le graphique de la station au fil des ans, on constate que
+la station est de nature additive puisque l'effet saisonnier fluctue
+autour de zéro.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawai_ets <-}\StringTok{ }\NormalTok{hawai_train }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ets}\NormalTok{()}
+\NormalTok{hawai_ets}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ETS(A,A,A) 
+## 
+## Call:
+##  ets(y = .) 
+## 
+##   Smoothing parameters:
+##     alpha = 0.6698 
+##     beta  = 0.003 
+##     gamma = 2e-04 
+## 
+##   Initial states:
+##     l = 315.2483 
+##     b = 0.102 
+##     s = 0.6164 0.0116 -0.9384 -2.0207 -3.0899 -2.8853
+##            -1.2381 0.7047 2.2379 2.8344 2.416 1.3513
+## 
+##   sigma:  0.3404
+## 
+##      AIC     AICc      BIC 
+## 1408.202 1409.940 1474.731
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{autoplot}\NormalTok{(hawai_ets)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\hypertarget{pruxe9vision-de-co2-atmosphuxe9rique-pour-comparer-aux-donnuxe9es-test}{%
+\subsection{Prévision de CO2 atmosphérique pour comparer aux données
+test}\label{pruxe9vision-de-co2-atmosphuxe9rique-pour-comparer-aux-donnuxe9es-test}}
+
+La fonction \texttt{forecast:\ :\ forecast()} a été utilisée pour
+obtenir la prédiction du modèle. L'argument h (nombre de périodes pour
+les prévisions) de 156 qui correspond au nombre d'observations, qui
+composent la série de test (longeur de la série de test).
+
+Le graphique suivant présente les performances du modèle de prévision :
+la ligne bleue indique les valeurs obtenues, tandis que la ligne verte
+indique les valeurs obtenues à partir de la série de tests. Les régions
+bleues et transparentes font référence aux intervalles prévisionnels du
+modèle.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawaifc <-}\StringTok{ }\NormalTok{hawai_ets }\OperatorTok{%>%}\StringTok{ }\KeywordTok{forecast}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{length}\NormalTok{(hawai_test))}
+\KeywordTok{autoplot}\NormalTok{(hawaifc) }\OperatorTok{+}\StringTok{ }\KeywordTok{autolayer}\NormalTok{(hawai_test, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-7-1.pdf}
+On observe que l'approximation du modèle est plus élevée pour certaines
+années, tandis que pour d'autres, il y a une sous-estimation ou une
+surestimation, cependant, il est pertinent de faire une analyse de
+précision et de résidus pour la vérifier.
+
+Dans le tableau suivant, on observe que l'erreur d'échelle absolue
+moyenne (MASE) de la prévision est de 0,7198956 et celle du modèle est
+de 0,2034533, ce qui indique que le modèle fournit une bonne prévision
+puisque plus cette valeur est proche de zéro, meilleure est la capacité
+de prévision du modèle.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{accuracy}\NormalTok{(hawaifc, hawai_ts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       ME      RMSE       MAE         MPE       MAPE      MASE
+## Training set 0.009127538 0.3329635 0.2496935 0.002272597 0.07593717 0.2034533
+## Test set     0.258792487 1.1125984 0.8835110 0.067546737 0.24278880 0.7198956
+##                    ACF1 Theil's U
+## Training set 0.06670592        NA
+## Test set     0.94372350 0.8673732
+\end{verbatim}
+
+\hypertarget{analyse-des-ruxe9sidus}{%
+\subsection{Analyse des résidus}\label{analyse-des-ruxe9sidus}}
+
+Afin de vérifier ces propriétés, la fonction
+\texttt{forecast::checkresiduals()} est utilisée comme suit :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{checkresiduals}\NormalTok{(hawai_ets)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{verbatim}
+## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ETS(A,A,A)
+## Q* = 54.438, df = 8, p-value = 5.676e-09
+## 
+## Model df: 16.   Total lags used: 24
+\end{verbatim}
+
+Il est à noter que la p-value obtenue est de 5.676e-09.Il est
+statistiquement significative. Elle indique une preuve solide contre
+l'hypothèse nulle, car il y a moins de 5\% de probabilité que
+l'hypothèse nulle soit correcte (et les résultats sont aléatoires).
+
+En général, les graphiques ci-dessus montrent que la moyenne des résidus
+est proche de zéro et qu'il n'y a pas de corrélation significative entre
+eux. La variation présentée dans le graphique des résidus en fonction du
+temps tend à être constante. Alors que l'histogramme des résidus indique
+qu'il n'y a pas de distribution normale, la normalité des résidus sera
+vérifiée par un test de Shapiro-Wilk.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(hawai_ets))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(hawai_ets)
+## W = 0.96983, p-value = 6.061e-07
+\end{verbatim}
+
+La p-value (\textasciitilde{} 6.061e-07) indique que la distribution des
+résidus n'est pas normale.
+
+Une méthode de prévision est considérée bonne lorsque ses résidus
+présentent les propriétés suivantes : absence de corrélation entre les
+résidus, la moyenne des résidus est de zéro, la variance des résidus est
+constante, les résidus sont normalement distribués. Bien que de ces
+quatre paramètres, le dernier n'est pas rempli, la méthode appliquée
+génère de bonnes prévisions. Cependant, l'application d'une
+transformation de Box-Cox peut parfois contribuer à améliorer la
+normalité de la distribution des résidus.
+
+\hypertarget{application-de-la-transformation-de-box-cox}{%
+\subsubsection{Application de la transformation de
+Box-Cox}\label{application-de-la-transformation-de-box-cox}}
+
+La modélisation des séries temporelles avec la transformation Box-Cox
+est effectuée de la même manière que pour les séries temporelles sans
+transformation, mais en utilisant le paramètre lambda dans l'application
+de la méthode ETS, qui est estimé avec la fonction de
+prévision::BoxCox.lambda().
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hawai_BC <-}\StringTok{ }\NormalTok{hawai_train }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ets}\NormalTok{(}\DataTypeTok{lambda =} \KeywordTok{BoxCox.lambda}\NormalTok{(hawai_train))}
+
+\NormalTok{hawaifc_BC <-}\StringTok{ }\NormalTok{hawai_BC }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{forecast}\NormalTok{(}\DataTypeTok{h =} \KeywordTok{length}\NormalTok{(hawai_test))}
+
+\KeywordTok{autoplot}\NormalTok{(hawaifc_BC) }\OperatorTok{+}\StringTok{ }\KeywordTok{autolayer}\NormalTok{(hawai_test, }\DataTypeTok{color =} \StringTok{"green"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{accuracy}\NormalTok{(hawaifc_BC, hawai_ts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                      ME      RMSE       MAE         MPE       MAPE      MASE
+## Training set 0.01317536 0.3201071 0.2414950 0.003562256 0.07340163 0.1967731
+## Test set     0.17310078 1.0530018 0.8432859 0.044216546 0.23196266 0.6871197
+##                    ACF1 Theil's U
+## Training set 0.03928175        NA
+## Test set     0.94442197 0.8221877
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{checkresiduals}\NormalTok{(hawai_BC)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercice-_5_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{verbatim}
+## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ETS(A,A,A)
+## Q* = 42.618, df = 8, p-value = 1.037e-06
+## 
+## Model df: 16.   Total lags used: 24
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(hawai_BC))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(hawai_BC)
+## W = 0.96958, p-value = 5.491e-07
+\end{verbatim}
+
+Après l'application de la transformation, il est possible de constater
+que les paramètres statistiques ont diminué, mais pas de manière
+significative. En ce qui concerne les résidus, ils ne présentent pas
+d'amélioration, conservant les mêmes caractéristiques que les précédents
+et la distribution des résidus n'est pas normale.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+On peut voir que les données montrent une tendance à la croissance. Le
+modèle appliqué montre de bonnes prévisions, il n'y a pas de corrélation
+entre les résidus, leur moyenne est nulle et la variance essaie de
+rester constante. Une transformation Box-Cox a été effectuée afin de
+savoir si les données pouvaient avoir une distribution normale,
+cependant, cela n'a pas été le cas et la modification des résultats des
+autres paramètres n'a pas été significative, c'est pourquoi il est
+décidé de continuer avec le modèle initialement proposé. Un autre modèle
+pourrait être essayé afin de comparer les résultats obtenus.
+
+\end{document}
